@@ -1,0 +1,23 @@
+sudo: required
+services: 
+  - docker
+before_install:
+  - docker build -t cheezitman/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true cheezitman/react-test npm test
+
+after_success:
+  - docker build -t cheezitman/complex-fib-client ./client
+  - docker build -t cheezitman/complex-fib-nginx ./nginx
+  - docker build -t cheezitman/complex-fib-server ./server
+  - docker build -t cheezitman/complex-fib-worker ./worker
+  # Log into docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take images and push'em to docker hub
+  - docker push cheezitman/complex-fib-client
+  - docker push cheezitman/complex-fib-nginx
+  - docker push cheezitman/complex-fib-server
+  - docker push cheezitman/complex-fib-worker
+  
+
