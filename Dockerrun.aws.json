@@ -27,7 +27,7 @@
       "image": "cheezitman/complex-fib-nginx",
       "essential": true,
       "memory": 128,
-      "portmappings": [
+      "portMappings": [
         {
           "hostPort": 80,
           "containerPort": 80
