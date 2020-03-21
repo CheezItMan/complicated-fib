@@ -21,6 +21,7 @@ after_success:
   - docker push cheezitman/complex-fib-worker
   
 deploy:
+  edge: true
   provider: elasticbeanstalk
   region: us-east-1
   app: complicated-fib
@@ -31,4 +32,3 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   on:
     branch: master
-    
