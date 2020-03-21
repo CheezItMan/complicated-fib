@@ -20,4 +20,15 @@ after_success:
   - docker push cheezitman/complex-fib-server
   - docker push cheezitman/complex-fib-worker
   
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: complicated-fib
+  env: ComplicatedFib-env
+  bucket_name: elasticbeanstalk-us-east-1-190871853618
+  bucket_path: complicated-fib
+  on:
+    branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
 
